@@ -113,27 +113,20 @@ var cy = cytoscape({
     },
   });
 
-  var algo = cy.elements().floydWarshall({
-    function(){
-  const weight = this.data('weight');
-  return weight;
-},
-    directed: false
-  })
-  
-  // algo.path.select()
-  console.log(algo.distance)
-    
-  var i = 0;
-  var highlightNextEle = function () {
-    if (i < algo.path.length) {
-      algo.path[i].addClass("highlighted");
-      i++;
-      setTimeout(highlightNextEle, 1000);
-    }
-  };
-  
-  // kick off first highlight
-  highlightNextEle();
+var algo = cy.elements().floydWarshall();
+algo.path('#t1', '#w3').select();
+
+// algo.path.select()
+var i = 0;
+var highlightNextEle = function () {
+  if (i < algo.path('#t1', '#w3').length) {
+    algo.path('#t1', '#w3')[i].addClass("highlighted");
+    i++;
+    setTimeout(highlightNextEle, 1000);
+  }
+};
+
+// kick off first highlight
+highlightNextEle();
 
   

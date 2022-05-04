@@ -15,8 +15,10 @@ var cy = cytoscape({
       .selector("edge")
       .style({
         "curve-style": "bezier",
-        "target-arrow-shape": "triangle",
+        // "target-arrow-shape": "triangle",
         width: 4,
+        content: "data(weight)",
+        "font-size": "10px",
         "line-color": "#ddd",
         "target-arrow-color": "#ddd",
       })
@@ -107,29 +109,33 @@ var cy = cytoscape({
   
     layout: {
       name: "cose",
-      directed: true,
+      directed: false,
       roots: "#t1",
       padding: 10,
+      
     },
   });
+  
 
-  var algo = cy.elements().bellmanFord({
-    root: '#t1',
-    directed: true
-  })
-  algo.pathTo.select()
-  console.log(algo.distanceTo)
-    
+var algo = cy.elements().bellmanFord({ root: "#t1" });
+var leaves_arr = cy.elements().nodes().leaves();
+
+console.log(leaves_arr);
+for (let j = 1; j < leaves_arr.length; j++) {
+  var leafId = leaves_arr[j].data('id');
+  console.log('#'+leafId);
+  // algo.pathTo('#'+leafId).select();
   var i = 0;
   var highlightNextEle = function () {
-    if (i < algo.pathTo.length) {
-      algo.pathTo[i].addClass("highlighted");
+    if (i < algo.pathTo('#'+leafId).length) {
+      algo.pathTo('#' + leafId)[i].addClass("highlighted");
+      console.log('#' + leafId);
       i++;
       setTimeout(highlightNextEle, 1000);
     }
   };
-  
-  // kick off first highlight
+  console.log("yo")
   highlightNextEle();
+}
 
-  
+
