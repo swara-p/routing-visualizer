@@ -31,3 +31,5 @@ A static routing table is constructed based upon the routing information stored 
 - Floyd Warshall Algorithm
 
 > Here we have visualized all of the shortest distance algoorithms as they tend to serve the basic purpose of routing i.e sending packets from one device to other as fast as possible. Even the Adaptive Algorithms make use of Shortest Distance Algorithms, once they are done with calculation of Routing Tables which is the key differentiator between Adaptive and Non Adaptive Algorithms.
+
+> [Algorithm-implementations]()
